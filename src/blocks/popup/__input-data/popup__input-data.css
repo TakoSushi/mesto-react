@@ -1,0 +1,22 @@
+.popup__input-data {
+  width: 100%;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  display: block;
+  box-sizing: border-box;
+  border: 0 solid white;
+  border-bottom-width: 1px;
+  border-bottom-color: rgba(0, 0, 0, .2);
+  padding-bottom: 13px;
+  margin-bottom: 5px;
+  text-overflow: ellipsis;
+}
+
+.popup__input-data::placeholder {
+  transition: opacity .3s ease;
+}
+
+.popup__input-data:focus::placeholder {
+  opacity: 0;
+}

@@ -1,0 +1,14 @@
+.popup__container {
+  width: 282px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+@media (min-width: 640px){
+  .popup__container {
+    width: 510px;
+    gap: 8px;
+  }
+}

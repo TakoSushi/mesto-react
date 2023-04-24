@@ -1,0 +1,21 @@
+.popup__close {
+  width: 20px;
+  height: 20px;
+  border: none;
+  background: center / contain no-repeat rgba(0, 0, 0, 0) url(../../../images/close_icon_white.png);
+  align-self: flex-end;
+  transition: opacity .2s linear;
+
+}
+
+.popup__close:hover {
+  cursor: pointer;
+  opacity: .6;
+}
+
+@media (min-width: 640px) {
+  .popup__close {
+    width: 32px;
+    height: 32px;
+  }
+}

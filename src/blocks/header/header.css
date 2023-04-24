@@ -1,0 +1,22 @@
+.header {
+  max-width: 320px;
+  box-sizing: border-box;
+  border-bottom: 1px solid rgba(84, 84, 84, .7);
+  padding-bottom: 27px;
+  margin: 0 auto;
+  margin-bottom: 42px;
+}
+
+@media (min-width: 640px) {
+  .header {
+    max-width: 581px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .header {
+    max-width: 880px;
+    padding-bottom: 37px;
+    margin-bottom: 40px;
+  }
+}
