@@ -21,15 +21,9 @@ function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
 
   useEffect( () => {
     api.getInitialCards()
-    .then( (cardsData) => {
-      const cardsList = cardsData.map( (card) => {
-      return <Card key={card._id} card={card} onCardClick={onCardClick} />;
-      });
-
-      setCards(cardsList);
-    })
+    .then( (cardsData) => setCards(cardsData))
     .catch((err) => console.warn(err));
-  }, [onCardClick]);
+  }, []);
 
 
   return (
@@ -65,7 +59,9 @@ function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
 
       <section className="photo-grid" aria-label="Фотогалерея">
         <ul className="photo-grid__list">
-          {cards}
+          {cards.map( (card) => {
+            return <Card key={card._id} card={card} onCardClick={onCardClick}/>;
+          })}
         </ul>
       </section>
     </main>
