@@ -18,6 +18,7 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({});
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect( () => {
     api.getUserInfo()
@@ -65,21 +66,30 @@ function App() {
   }
 
   function handleUpdateUser(newUserData) {
+    setIsLoading(true);
+
     api.setUserInfo(newUserData).then( (userData) => setCurrentUser(userData))
+    .then( () => closeAllPopups())
     .catch( err => console.warn(err))
-    .finally( () => closeAllPopups());
+    .finally( () => setIsLoading (false));
   }
   
   function handleUpdateAvatar(newAvatarUrl) {
+    setIsLoading(true);
+
     api.setUserAvatar(newAvatarUrl).then( (userData) => setCurrentUser(userData))
+    .then( () => closeAllPopups())
     .catch( err => console.warn(err))
-    .finally( () => closeAllPopups());
+    .finally( () => setIsLoading (false));
   }
 
   function handleAddPlaceSubmit(newCardData) {
+    setIsLoading(true);
+
     api.addNewCard(newCardData).then( (newCard) => setCards([newCard, ...cards]))
+    .then( () => closeAllPopups())
     .catch( err => console.warn(err))
-    .finally( () => closeAllPopups());
+    .finally( () => setIsLoading (false));
   }
 
   return (
@@ -102,26 +112,28 @@ function App() {
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
           onUpdateUser={handleUpdateUser}
+          isLoading={isLoading}
         />
         
         <AddPlacePopup 
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
           onAddPlace={handleAddPlaceSubmit}
+          isLoading={isLoading}
         />
 
         <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
           onUpdateAvatar={handleUpdateAvatar}
+          isLoading={isLoading}
         />
 
         <PopupWithForm
           title="Вы уверены?"
           buttonText="Да"
           name="delete-confirm"
-        >
-        </PopupWithForm>
+        />
           
         <ImagePopup
         card={selectedCard}

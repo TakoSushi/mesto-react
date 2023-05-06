@@ -1,9 +1,13 @@
 import PopupWithForm from "./PopupWithForm";
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 
-function EditProfilePopup({isOpen, onClose, onUpdateAvatar}) {
+function EditAvatarPopup({isOpen, onClose, onUpdateAvatar, isLoading}) {
   const avatarRef = useRef(null);
   
+  useEffect(() => {
+    avatarRef.current.value = null;
+  }, [isOpen]);
+
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -20,6 +24,7 @@ function EditProfilePopup({isOpen, onClose, onUpdateAvatar}) {
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
+      isLoading={isLoading}
     >
       <input
         ref={avatarRef}
@@ -34,4 +39,4 @@ function EditProfilePopup({isOpen, onClose, onUpdateAvatar}) {
   )
 }
 
-export default EditProfilePopup;
+export default EditAvatarPopup;
