@@ -1,19 +1,10 @@
-import { useState, useEffect, useContext } from 'react';
-import api from '../utils/api.js';
+import { useContext } from 'react';
 import Card from './Card.js';
 import { CurrentUserContext } from '../context/CurrentUserContext.js';
 
-function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
+function Main({cards, onEditProfile, onAddPlace, onEditAvatar, onCardClick, onCardLike, onCardDelete}) {
 
   const currentUser = useContext(CurrentUserContext);
-
-  const [cards, setCards] = useState([]);
-
-  useEffect( () => {
-    api.getInitialCards()
-    .then( (cardsData) => setCards(cardsData))
-    .catch((err) => console.warn(err));
-  }, []);
 
   return (
     <main>
@@ -49,7 +40,13 @@ function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
       <section className="photo-grid" aria-label="Фотогалерея">
         <ul className="photo-grid__list">
           {cards.map( (card) => {
-            return <Card key={card._id} card={card} onCardClick={onCardClick}/>;
+            return <Card 
+              key={card._id}
+              card={card}
+              onCardClick={onCardClick}
+              onCardLike={onCardLike}
+              onCardDelete={onCardDelete}
+            />;
           })}
         </ul>
       </section>
